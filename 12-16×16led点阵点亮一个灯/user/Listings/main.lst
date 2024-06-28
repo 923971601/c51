@@ -1,0 +1,121 @@
+C51 COMPILER V9.54   MAIN                                                                  02/17/2024 19:27:42 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\KEIL5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "reg52.h"//引入头文2件
+   2             typedef  unsigned int u16;//将函数名称简洁
+   3             typedef  unsigned  char u8;//将函数名称简洁
+   4             
+   5              sbit SRCLK =P3^6; 
+   6              sbit rCLK =P3^5; 
+   7              sbit SER =P3^4; 
+   8             
+   9             
+  10          //   
+  11          //  #define LEDDZ_COL_PORT P0
+  12          
+  13          //u8 gled_row[8]={0x08,0x58,0x48,0x7F,0x48,0x58,0x08,0x00};//led点阵显示图像的数据
+  14          //u8 gled_col[8]={0x7f,0xbf,0xdf,0xef,0xf7,0xfb,0xfd,0xfe};
+  15          
+  16          void delay_10us(u16 ten_us)//引入延时函数
+  17               
+  18               {
+  19   1             while(ten_us--);
+  20   1           }
+  21          
+  22               
+  23              
+  24                  
+  25               void hc595_write_date(u8 dat1,u8 dat2,u8 dat3, u8 dat4)//用dat而不用date是因为date已经被定�
+             -�；
+  26               {
+  27   1             u16 i=0;
+  28   1             for(i=0;i<8;i++)
+  29   1             {SER=dat4>>7;//让dat对应的1000 0000移位成0000 0001 即使最下面的串口为高电平    
+  30   2               dat4<<=1;//使次高位的0向左移一位；即0000 0001变为0000 0010以此类推
+  31   2               SRCLK=0;//给一个上升沿
+  32   2               delay_10us(1);//消抖
+  33   2               SRCLK=1;//给一个上升沿
+  34   2               delay_10us(1);//消抖
+  35   2             }
+  36   1             for(i=0;i<8;i++)
+  37   1             {SER=dat3>>7;//让dat对应的1000 0000移位成0000 0001 即使最下面的串口为高电平    
+  38   2               dat3<<=1;//使次高位的0向左移一位；即0000 0001变为0000 0010以此类推
+  39   2               SRCLK=0;//给一个上升沿
+  40   2               delay_10us(1);//消抖
+  41   2               SRCLK=1;//给一个上升沿
+  42   2               delay_10us(1);//消抖
+  43   2             }
+  44   1             
+  45   1             
+  46   1             for(i=0;i<8;i++)
+  47   1             {SER=dat2>>7;//让dat对应的1000 0000移位成0000 0001 即使最下面的串口为高电平    
+  48   2               dat2<<=1;//使次高位的0向左移一位；即0000 0001变为0000 0010以此类推
+  49   2               SRCLK=0;//给一个上升沿
+  50   2               delay_10us(1);//消抖
+  51   2               SRCLK=1;//给一个上升沿
+  52   2               delay_10us(1);//消抖
+  53   2             }
+C51 COMPILER V9.54   MAIN                                                                  02/17/2024 19:27:42 PAGE 2   
+
+  54   1             
+  55   1             
+  56   1             for(i=0;i<8;i++)
+  57   1             {SER=dat1>>7;//让dat对应的1000 0000移位成0000 0001 即使最下面的串口为高电平    
+  58   2               dat1<<=1;//使次高位的0向左移一位；即0000 0001变为0000 0010以此类推
+  59   2               SRCLK=0;//给一个上升沿
+  60   2               delay_10us(1);//消抖
+  61   2               SRCLK=1;//给一个上升沿
+  62   2               delay_10us(1);//消抖
+  63   2            
+  64   2      
+  65   2             }
+  66   1             rCLK=0;
+  67   1             delay_10us(1);
+  68   1              rCLK=1;
+  69   1             delay_10us(1);
+  70   1             
+  71   1           } 
+  72          
+  73          void main()
+  74          {
+  75   1        u8 i=0;
+  76   1             
+  77   1      while(1)
+  78   1        {hc595_write_date(0x01,0x00,0xfe,0xff);
+  79   2            
+  80   2          }
+  81   1          
+  82   1          
+  83   1          
+  84   1      
+  85   1          
+  86   1      }
+  87          
+  88          
+  89          
+  90          
+  91          
+  92          
+  93          
+  94          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    197    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

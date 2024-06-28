@@ -1,0 +1,90 @@
+C51 COMPILER V9.54   MAIN                                                                  02/05/2024 14:46:18 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\KEIL5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.l
+                    -st) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "reg52.h"//引入头文2件
+   2             typedef  unsigned int u16;//将函数名称简洁
+   3             typedef  unsigned  char u8;//将函数名称简洁
+   4             
+   5              sbit SRCLK =P3^6; 
+   6              sbit rCLK =P3^5; 
+   7              sbit SER =P3^4; 
+   8             
+   9             
+  10             
+  11            #define LEDDZ_COL_PORT P0
+  12          
+  13          
+  14            u8 ghc595_buf[8]={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};//LED点阵一行行显示
+  15          //u8 ghc595_buu[8]={0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+  16          
+  17          
+  18          void delay_10us(u16 ten_us)//引入延时函数
+  19               
+  20               {
+  21   1             while(ten_us--);
+  22   1           }
+  23          
+  24               
+  25               void hc595_write_date(u8 dat)//用dat而不用date是因为date已经被定义；
+  26               {
+  27   1             u16 i=0;
+  28   1             for(i=0;i<8;i++)
+  29   1             {SER=dat>>7;//让dat对应的1000 0000移位成0000 0001 即使最下面的串口为高电平    
+  30   2               dat<<=1;//使次高位的0向左移一位；即0000 0001变为0000 0010以此类推
+  31   2                   SRCLK=0;
+  32   2               delay_10us(1);//消抖
+  33   2               SRCLK=1;
+  34   2               delay_10us(1);//消抖
+  35   2            
+  36   2      
+  37   2             }
+  38   1             rCLK=0;
+  39   1             delay_10us(1);
+  40   1              rCLK=1;
+  41   1             delay_10us(1);
+  42   1             
+  43   1           } 
+  44          
+  45          void main()
+  46          {
+  47   1      u8 i=0;
+  48   1       LEDDZ_COL_PORT=0x00;
+  49   1      while(1)
+  50   1        {
+  51   2      
+  52   2        for(i=0;i<8;i++)
+  53   2      {hc595_write_date(0x00);
+  54   3      hc595_write_date(ghc595_buf[i]);
+C51 COMPILER V9.54   MAIN                                                                  02/05/2024 14:46:18 PAGE 2   
+
+  55   3      delay_10us(50000);
+  56   3      }
+  57   2      
+  58   2      
+  59   2      
+  60   2      
+  61   2      
+  62   2      }
+  63   1      }
+  64          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    102    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

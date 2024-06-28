@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\point" 
+PRINT(".\Listings\point.m51") RAMSIZE(256) 

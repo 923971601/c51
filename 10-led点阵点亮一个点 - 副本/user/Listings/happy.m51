@@ -1,0 +1,137 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/22/2024  23:21:04  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\happy PRINT (.\Listings\happy.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  D:\KEIL5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\happy (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0010H     UNIT         ?DT?MAIN
+            IDATA   0018H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     0037H     UNIT         ?PR?_HC595_WRITE_DATE?MAIN
+            CODE    00C6H     0024H     UNIT         ?PR?MAIN?MAIN
+            CODE    00EAH     0015H     UNIT         ?C_INITSEG
+            CODE    00FFH     000FH     UNIT         ?PR?_DELAY_10US?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\happy (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?_HC595_WRITE_DATE?MAIN
+  +--> ?PR?_DELAY_10US?MAIN
+
+?PR?_HC595_WRITE_DATE?MAIN
+  +--> ?PR?_DELAY_10US?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\happy (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/22/2024  23:21:04  PAGE 2
+
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:008FH         PUBLIC        _hc595_write_date
+  D:0080H         PUBLIC        P0
+  B:00B0H.6       PUBLIC        SRCLK
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:00C6H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0103H         PUBLIC        _delay_10us
+  D:0008H         PUBLIC        gled_col
+  B:00B0H.5       PUBLIC        rCLK
+  D:0010H         PUBLIC        gled_row
+  D:00C8H         PUBLIC        T2CON
+  B:00B0H.4       PUBLIC        SER
+  D:00D0H         PUBLIC        PSW
+  C:00FFH         SYMBOL        L?0017
+  -------         PROC          L?0016
+  -------         ENDPROC       L?0016
+  C:00FFH         SYMBOL        L?0017
+  -------         PROC          _DELAY_10US
+  D:0006H         SYMBOL        ten_us
+  C:0103H         LINE#         17
+  C:0103H         LINE#         19
+  C:0103H         LINE#         20
+  C:010DH         LINE#         21
+  -------         ENDPROC       _DELAY_10US
+  -------         PROC          _HC595_WRITE_DATE
+  D:0005H         SYMBOL        dat
+  -------         DO            
+  D:0002H         SYMBOL        i
+  -------         ENDDO         
+  C:008FH         LINE#         24
+  C:0091H         LINE#         25
+  C:0091H         LINE#         26
+  C:0094H         LINE#         27
+  C:0094H         LINE#         28
+  C:009FH         LINE#         29
+  C:00A3H         LINE#         30
+  C:00A5H         LINE#         31
+  C:00A8H         LINE#         32
+  C:00AAH         LINE#         33
+  C:00ADH         LINE#         36
+  C:00B8H         LINE#         37
+  C:00BAH         LINE#         38
+  C:00BDH         LINE#         39
+  C:00BFH         LINE#         40
+  -------         ENDPROC       _HC595_WRITE_DATE
+  -------         PROC          MAIN
+  -------         DO            
+  D:0001H         SYMBOL        i
+  -------         ENDDO         
+  C:00C6H         LINE#         44
+  C:00C6H         LINE#         45
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/22/2024  23:21:04  PAGE 3
+
+
+  C:00C6H         LINE#         46
+  C:00C6H         LINE#         48
+  C:00C6H         LINE#         49
+  C:00C8H         LINE#         50
+  C:00CFH         LINE#         52
+  C:00D8H         LINE#         53
+  C:00DFH         LINE#         54
+  C:00E4H         LINE#         56
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=25.0 xdata=0 code=270
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
